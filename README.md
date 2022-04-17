@@ -1,0 +1,1 @@
+# Odoo-Barcode-Extension
