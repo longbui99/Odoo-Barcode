@@ -6,5 +6,6 @@ Applicable for Chromium browsers
 - macOS: Command + 1
 - Ctrl + Enter for submittion
 
+
 **License:**
 MIT
