@@ -1,1 +1,53 @@
-<!DOCTYPE html><html><header> <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> <link rel="stylesheet" href="index.css"></header><body> <div class="p-2 d-inline-block page"> <div> <div> <textarea class="form-control" id="barcode-input" placeholder="Enter your barcode here" autofocus></textarea> </div></div><div class="mt-2"> <button id="barcode-submit" class="btn btn-info">Submit</button> </div><div class="d-flex flex-column"> <p> <b>Ctrl + Enter to quick Submit</b></p><p class="d-flex justify-content-end"><span> Powered by <a href="https://www.drakebui.ml" target="_blank">Long Bui</a> </span></p></div><div class="detail"> <div class="d-inline d-collapse hide"> <img src="./static/double-right.svg" class="hdl-button hide" alt="My Happy SVG"/> <img src="./static/double-down.svg" class="hdl-button show" alt="My Happy SVG"/> <textarea class="form-control input show" id="element-input" value="body" placeholder="To use in query selector"></textarea> </div></div></div></body><script src="index.js"></script></html>
+<!DOCTYPE html>
+<html>
+<header>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+</header>
+
+<body>
+    <div class="p-2 d-inline-block page">
+        <div>
+            <div> <textarea class="form-control" id="barcode-input" placeholder="Enter your barcode here"
+                    autofocus></textarea> </div>
+        </div>
+        <div class="mt-2"> <button id="barcode-submit" class="btn btn-info">Submit</button> </div>
+        <div class="d-flex flex-column">
+            <p> <b>Ctrl + Enter to quick Submit</b></p>
+            <p class="d-flex justify-content-end"><span> Powered by <a href="https://www.drakebui.ml"
+                        target="_blank">Long Bui</a> </span></p>
+        </div>
+        <div class="detail">
+            <div class="d-inline d-collapse hide">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <img src="./static/double-right.svg" class="hdl-button hide"
+                    alt="My Happy SVG" /> <img src="./static/double-down.svg" class="hdl-button show"
+                    alt="My Happy SVG" />
+                    </div>
+                    <div>
+                        <span>Custom Selector</span>
+                    </div>
+                </div>  <textarea class="form-control input show" id="element-input" value="body"
+                    placeholder="To use in query selector"></textarea> </div>
+        </div>
+        <div class="detail">
+            <div class="d-inline d-collapse hide">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <img src="./static/double-right.svg" class="hdl-button-timeout hide"
+                    alt="My Happy SVG" /> <img src="./static/double-down.svg" class="hdl-button-timeout show"
+                    alt="My Happy SVG" />
+                    </div>
+                    <div>
+                        <span>Custom Timeout</span>
+                    </div>
+                </div>  <input type="text" class="form-control input show" id="element-input-timeout" value="70"
+                    placeholder="Delay scan (ms)"></input> </div>
+        </div>
+    </div>
+</body>
+<script src="index.js"></script>
+
+</html>

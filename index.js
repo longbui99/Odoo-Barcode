@@ -1,13 +1,25 @@
 let submitButton = document.getElementById("barcode-submit"),
     inputText = document.getElementById("barcode-input"),
     barcode = document.getElementById("barcode-input"),
-    selector = document.getElementById("element-input");
+    selector = document.getElementById("element-input"),
+    delay = document.getElementById("element-input-timeout");
 for (let e of document.querySelectorAll(".hdl-button"))
     e.addEventListener("click", () => {
-        let e = document.querySelector(".d-collapse"),
+        let e = document.querySelector("#element-input"),
             t = e.classList.contains("hide") ? "show" : "hide";
         e.classList.remove("hide", "show"), e.classList.add(t);
     });
+for (let e of document.querySelectorAll(".hdl-button-timeout"))
+    e.addEventListener("click", () => {
+        let e = document.querySelector("#element-input-timeout"),
+            t = e.classList.contains("hide") ? "show" : "hide";
+        e.classList.remove("hide", "show"), e.classList.add(t);
+    });
+delay.addEventListener('keydown', event=>{
+    if ((event.keyCode < 48 && event.keykeyCode > 57) && (event.keyCode < 96 && event.keyCode > 105)) {
+        event.stopPropagation() 
+    }
+})
 chrome.storage.sync.get(["barcodeStorage"], function (res) {
     if (res) {
         if (res?.barcodeStorage) {
@@ -20,10 +32,13 @@ inputText.addEventListener("keyup", (evt) => {
 });
 async function sendEvent() {
     let [e] = await chrome.tabs.query({ active: !0, currentWindow: !0 });
-    chrome.scripting.executeScript({ target: { tabId: e.id }, function: simulateBarcodeScan, args: [barcode.value, selector.value] });
+    chrome.scripting.executeScript({ target: { tabId: e.id }, function: simulateBarcodeScan, args: [barcode.value, selector.value, delay.value] });
 }
-function simulateBarcodeScan(e, t) {
-    let timeSleep = 0, maxTime=70;
+function simulateBarcodeScan(e, t, delay) {
+    console.log(delay, ""===delay)
+    let maxTime = ("" === delay)? 70 : parseInt(delay)
+    console.log(maxTime)
+    let timeSleep = 0;
     if ("" === t || "body" === t || null === (t = document.querySelector(t))) {
         t = document.querySelector("body");
         let barcodes = e.split("\n");
