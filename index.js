@@ -64,7 +64,7 @@ inputText.addEventListener("keydown", (e) => {
 function filterBarcodeRegex(barcodes) {
     let newBarcodes = [];
     for (let barcode of barcodes) {
-        let match = barcode.match(/[^\?*](.{3,}[^\?*])[\n\r\t]*/)
+        let match = barcode.match(/(.[^\?*]{3,})[\n\r\t]*/)
         if (match) {
             newBarcodes.push(barcode)
         }
