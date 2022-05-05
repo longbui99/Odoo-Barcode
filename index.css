@@ -50,3 +50,23 @@
     margin-top: 5px;
     font-size: 12px;
 }
+
+.detail .barcode-hint{
+    padding: 10px 0px;
+    width: 100%;
+    text-align: center;
+    border-bottom: solid 1px lightgray;
+}
+.detail .barcode-hint div{
+    text-align: left;
+    padding-left: 5px;
+}
+
+.detail .barcode-hint div svg{
+    cursor: pointer;
+}
+
+.detail .barcode {
+    padding: 3px;
+    outline: none;
+}

@@ -8,10 +8,16 @@ async function loadLinearBarcode(imageTag) {
             code = await javascriptBarcodeReader({
                 image: imageTag,
                 barcode: type,
+                options: {
+                    singlePass: true
+                }
             })
-            barcodes.push(code)
+            barcodes.push({
+              name: type.toUpperCase().replace('-', ' '),
+              code:code
+            })
         }
-        catch (err){
+        catch (err) {
             continue
         }
     }

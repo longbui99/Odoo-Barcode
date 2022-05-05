@@ -64,24 +64,47 @@ inputText.addEventListener("keydown", (e) => {
 function filterBarcodeRegex(barcodes) {
     let newBarcodes = [];
     for (let barcode of barcodes) {
-        let match = barcode.match(/(.[^\?*]{3,})[\n\r\t]*/)
+        let match = barcode.code.match(/(.[^\?*]{3,})[\n\r\t]*/)
         if (match) {
             newBarcodes.push(barcode)
         }
     }
     return newBarcodes
 }
+function pushToLoad(barcode){
+    inputText.value += `${barcode}\n`
+}
+
+function copyBarcode(barcode){
+    navigator.clipboard.writeText(barcode)
+}
+
+function InsertBarcode(barcodes) {
+    let html = ''
+    for (let barcode of barcodes) {
+        html += `<div>
+        <b>${barcode.name}</b>: 
+        <span class="barcode" contenteditable="true">${barcode.code}</span> 
+        <span onclick="copyBarcode('${barcode.code}')"><svg width="12px" viewBox="0 0 512 512"><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span>
+        <span onclick="pushToLoad('${barcode.code}')"><svg  width="10px" viewBox="0 0 320 512"><path d="M285.1 145.7c-3.81 8.758-12.45 14.42-21.1 14.42L192 160.1V480c0 17.69-14.33 32-32 32s-32-14.31-32-32V160.1L55.1 160.1c-9.547 0-18.19-5.658-22-14.42c-3.811-8.758-2.076-18.95 4.408-25.94l104-112.1c9.498-10.24 25.69-10.24 35.19 0l104 112.1C288.1 126.7 289.8 136.9 285.1 145.7z"/></svg></span>
+        </div>`
+    }
+    imageSelector.innerHTML += html
+}
 
 async function readBarcodeFromBase64Image(tag, imageTag, base64) {
     callbacks = (barcode) => {
         if (barcode !== 'error decoding QR Code') {
-            tag.innerText += `${barcode}`
+            InsertBarcode({
+                name: "QR",
+                code: barcode
+            })
         }
     }
     loadQRBarcode(base64, callbacks)
     let LinearBarcodes = await loadLinearBarcode(imageTag)
     LinearBarcodes = filterBarcodeRegex(LinearBarcodes)
-    tag.innerText += LinearBarcodes.join("\n")
+    InsertBarcode(LinearBarcodes)
 }
 document.onpaste = function (event) {
     var items = (event.clipboardData || event.originalEvent.clipboardData).items;
@@ -93,7 +116,7 @@ document.onpaste = function (event) {
             reader.onload = async function (event) {
                 let image = document.createElement('img');
                 image.src = event.target.result;
-                imageSelector.innerText = '';
+                imageSelector.innerHTML = '';
                 readBarcodeFromBase64Image(imageSelector, image, event.target.result);
             };
             reader.readAsDataURL(blob);
