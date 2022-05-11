@@ -83,7 +83,7 @@ function copyBarcode(barcode) {
     navigator.clipboard.writeText(barcode);
 }
 
-function LoadFunction() {
+function LoadFunction(element) {
     for (let e of document.querySelectorAll(".copy-barcode"))
         e.addEventListener("click", (event) => {
             copyBarcode(event.currentTarget.getAttribute('barcode'))
@@ -105,18 +105,20 @@ function InsertBarcode(barcodes) {
         </div>`
     }
     imageSelector.innerHTML += html
-    setTimeout(() => {
-        LoadFunction()
-    }, 1)
+    if (barcodes.length > 0){
+        setTimeout(() => {
+            LoadFunction()
+        }, 1)
+    }
 }
 
 async function readBarcodeFromBase64Image(tag, imageTag, base64) {
     callbacks = (barcode) => {
         if (barcode !== 'error decoding QR Code') {
-            InsertBarcode({
+            InsertBarcode([{
                 name: "QR",
                 code: barcode
-            })
+            }])
         }
     }
     loadQRBarcode(base64, callbacks)
