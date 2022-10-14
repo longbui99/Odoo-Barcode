@@ -41,19 +41,19 @@ async function sendEvent() {
     chrome.scripting.executeScript({ target: { tabId: e.id }, function: simulateBarcodeScan, args: [barcode.value, selector.value, delay.value] });
 }
 function simulateBarcodeScan(e, t, delay) {
-    console.log(delay, "" === delay)
+    console.log(e)
     let maxTime = ("" === delay) ? 70 : parseInt(delay)
-    console.log(maxTime)
     let timeSleep = 0;
     if ("" === t || "body" === t || null === (t = document.querySelector(t))) {
         t = document.querySelector("body");
         for (let eventKey of ["keypress", "keydown"]){
             let barcodes = e.split("\n");
+            
             for (let i = 0; i < barcodes.length; i++) {
                 setTimeout(() => {
                     for (let n = 0; n < barcodes[i].length; n++) {
                         let d = barcodes[i][n].charCodeAt(0);
-                        void 0 !== d && t.dispatchEvent(new KeyboardEvent(eventKey, { keyCode: d, key:n}));
+                        void 0 !== d && t.dispatchEvent(new KeyboardEvent(eventKey, { keyCode: d, key: barcodes[i][n]}));
                     }
                 }, timeSleep)
                 timeSleep += maxTime
