@@ -1,7 +1,7 @@
 {
     "name": "Odoo Barcode",
     "description": "Build an Extension!",
-    "version": "2.2.1",
+    "version": "2.2.2",
     "manifest_version": 3,
     "icons": {
         "16": "static/logo.png",
