@@ -3,6 +3,12 @@
     "description": "Build an Extension!",
     "version": "2.2.1",
     "manifest_version": 3,
+    "icons": {
+        "16": "static/logo.png",
+        "32": "static/logo.png",
+        "48": "static/logo.png",
+        "128": "static/logo.png"
+    },
     "permissions": [
         "storage",
         "scripting",
@@ -18,6 +24,10 @@
         }
     },
     "action": {
-        "default_popup": "index.html"
+        "default_popup": "index.html",
+        "default_icon": {
+            "16": "static/logo.png",
+            "32": "static/logo.png"
+        }
     }
 }

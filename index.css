@@ -1,5 +1,7 @@
+body {
+}
 #barcode-submit {
-    background-color: #021a7a;
+    background-color: #ff014f;
     color: white;
     width: 100%;
     font-size: 12px;
@@ -55,7 +57,7 @@
     padding: 10px 0px;
     width: 100%;
     text-align: center;
-    border-bottom: solid 1px lightgray;
+    border-bottom: solid 1px #ff014f;
 }
 .detail .barcode-hint div{
     text-align: left;
